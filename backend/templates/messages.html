@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='hermes_icon.png') }}" type="image/png">
+    <title>Hermes - Mensagens</title>
+</head>
+<body>
+    <h2>Você está logado como {{ session['user_id'] }}</h2>
+    <form method="post">
+        Usuário destino: <input type="number" value = "0000" min="0001" max="9999"name="to_id" class="appearance-none"><br>
+        Texto: <textarea name="msg_text" rows="3" cols="40" placeholder="Digite sua mensagem..."></textarea><br>
+        <button>Enviar</button>
+    </form>
+    <a href="{{ url_for('logout') }}">Sair</a>
+    <a href="{{ url_for('get_users') }}">Ver usuários ativos</a>
+    <a href="{{ url_for('get_message') }}">Mensagens não lidas</a>
+    {% if 'Erro' in return_msg %}
+        <p style="color:red">{{ return_msg }}</p>
+    {% else %}
+        <p style="color:green">{{ return_msg }}</p>
+    {% endif %}
+</body>
+</html>
