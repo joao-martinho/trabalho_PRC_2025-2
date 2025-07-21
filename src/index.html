@@ -6,7 +6,89 @@
     <title>Trabalho</title>
 </head>
 <body>
-    
-    <script src="../script/handler.js"></script>
+    <h1>Teste de conexão</h1>
+
+    <h2>DE:</h2>
+    <p>Identificador do usuário: <input type="text" id="userId" name="userId"></p>
+    <p>Senha do usuário: <input type="text" id="pass" name="pass"></p>
+    <h2>PARA:</h2>
+    <p>Destinatário: <input type="text" id="to" name="to"></p>
+    <p>Mensagem: <input text="text" id="msg" name="msg"></p>
+
+    <button onclick="getUsers()">GET USERS</button>
+    <button onclick="getMessage()">GET MESSAGE</button>
+    <button onclick="sendMessage()">Send MESSAGE</button>
+
+    <p id="output"></p>
+
+    <script>
+        const output = document.getElementById('output');
+
+        function getFrom() {
+            const userId = document.getElementById('userId').value;
+            const pass = document.getElementById('pass').value;
+
+            return {
+                user: userId,
+                password: pass
+            }
+        }
+
+        function getTo() {
+            return {
+                to: document.getElementById('to').value,
+                msg: document.getElementById('msg').value
+            }
+        }
+
+        function getUsers() {
+            fetch('http://localhost:3000/get-users', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(getFrom())
+            }).then(res => res.text())
+            .then(data => {
+                output.textContent = data;
+            }).catch(err => {
+                output.textContent = 'Erro: ' + err.message;
+            })
+        }
+
+        function getMessage() {
+            fetch('http://localhost:3000/get-message', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(getFrom())
+            }).then(res => res.text())
+            .then(data => {
+                output.textContent = data;
+            }).catch(err => {
+                output.textContent = 'Erro: ' + err.message;
+            })
+        }
+
+        function sendMessage() {
+            const from = getFrom();
+            const to = getTo();
+            const payload = {
+                from: from.user,
+                pass: from.password,
+                to: to.to,
+                msg: to.msg
+            }
+
+            fetch('http://localhost:3000/send-message', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(res => res.text())
+            .then(data => {
+                output.textContent = data
+            })
+            .catch(err => {
+                output.textContent = err
+            })
+        }
+    </script>
 </body>
 </html>

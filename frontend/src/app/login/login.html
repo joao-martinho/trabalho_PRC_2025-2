@@ -1,0 +1,49 @@
+<div class="login">
+    <mat-card class="login-card" appearance="outlined">
+        <div class="card-center">
+            <mat-card-header class="header">
+                <mat-card-title>LOGIN</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Digite seu Usuário</mat-label>
+                    <input #userInput matInput [formControl]="userFormControl" maxlength="4">
+                    @if (userFormControl.hasError('required')) {
+                        <mat-error>Necessário informar usuário</mat-error>
+                    }
+                    @if (userFormControl.hasError('pattern')) {
+                        <mat-error>Usuário deve conter 4 dígitos</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Digite sua senha</mat-label>
+                    <input 
+                        #passwordInput
+                        matInput 
+                        [type]="hide() ? 'password' : 'text'" 
+                        [formControl]="passFormControl"
+                        maxlength="5"
+                    />
+                    <button
+                        matIconButton
+                        matSuffix
+                        (click)="clickEvent($event)"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()"
+                    >
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    @if (userFormControl.hasError('required')) {
+                        <mat-error>Necessário informar a senha</mat-error>
+                    }
+                    @if (userFormControl.hasError('pattern')) {
+                        <mat-error>Senha deve conter 5 letras minúsculas</mat-error>
+                    }
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button matButton="outlined" id="next" (click)="next()">Avançar</button>
+            </mat-card-actions>
+        </div>
+    </mat-card>
+</div>

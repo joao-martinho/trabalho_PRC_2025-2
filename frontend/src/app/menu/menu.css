@@ -1,0 +1,13 @@
+
+img {
+    height: 100%;
+    margin-right: 20px;
+}
+
+mat-toolbar {
+    background-color: #1f1f1f;
+    color: #d76f2c;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
