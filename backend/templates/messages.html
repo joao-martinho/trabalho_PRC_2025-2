@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <link rel="icon" href="{{ url_for('static', filename='hermes_icon.png') }}" type="image/png">
+    <meta charset="UTF-8">
     <title>Hermes - Mensagens</title>
+    <link rel="icon" href="{{ url_for('static', filename='hermes_icon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <script src="{{ url_for('static', filename='main.js') }}" defer></script>
 </head>
 <body>
     <h2>Você está logado como {{ session['user_id'] }}</h2>
-    <form method="post">
-        Usuário destino: <input type="number" value = "0000" min="0001" max="9999"name="to_id" class="appearance-none"><br>
-        Texto: <textarea name="msg_text" rows="3" cols="40" placeholder="Digite sua mensagem..."></textarea><br>
-        <button>Enviar</button>
+
+    <hr>
+
+    <form id="send-form">
+        Usuário destino:<input type="number" name="to_id" min="0" max="9999" required><br>
+        Texto: <textarea name="msg_text" rows="3" cols="40" placeholder="..." required></textarea><br>
+        <button type="submit">Enviar</button>
     </form>
-    <a href="{{ url_for('logout') }}">Sair</a>
-    <a href="{{ url_for('get_users') }}">Ver usuários ativos</a>
-    <a href="{{ url_for('get_message') }}">Mensagens não lidas</a>
-    {% if 'Erro' in return_msg %}
-        <p style="color:red">{{ return_msg }}</p>
-    {% else %}
-        <p style="color:green">{{ return_msg }}</p>
-    {% endif %}
+    <div id="sent-msg"></div>
+
+    <hr>
+
+    <a href="{{ url_for('logout') }}">Sair</a><br>
+    <button onclick="getUsers()">Ver usuários ativos</button>
+    <button onclick="getMessage()">Mensagens não lidas</button>
+    <div>
+        <h4>Usuários ativos:</h4>
+        <p id="active-users"></p>
+    </div>
+    <div>
+        <h4>Mensagens não lidas:</h4>
+        <p id="received-msg"></p>
+    </div>
 </body>
 </html>

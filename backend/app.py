@@ -22,7 +22,7 @@ def udp_send(message):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
             sock.sendto((message + "\r\n").encode(), (TCP_HOST, UDP_PORT))
-            return "Mensagem enviada com sucesso"
+            return "Mensagem enviada com sucesso!"
     except Exception as e:
         return f"Erro UDP: {str(e)}"
   
@@ -48,7 +48,7 @@ def login():
             session['password'] = form_password
             return redirect(url_for('messages_dashboard'))
         else:
-            return render_template('login.html', error='Usuário ou senha inválidos')
+            return render_template('login.html', error='Erro: Usuário ou senha inválidos.')
 
     return render_template('login.html')
 
@@ -64,21 +64,21 @@ def messages_dashboard():
 
 @app.route('/get-users')
 def get_users():
-    if 'user_id' not in session: return 'Usuário não autenticado', 401
+    if 'user_id' not in session: return 'Erro: Usuário não autenticado.', 401
     
     msg = f"GET USERS {session['user_id']}:{session['password']}"
     return tcp_request(msg)
 
 @app.route('/get-message')
 def get_message():
-    if 'user_id' not in session: return 'Usuário não autenticado', 401
+    if 'user_id' not in session: return 'Erro: Usuário não autenticado.', 401
     
     msg = f"GET MESSAGE {session['user_id']}:{session['password']}"
     return tcp_request(msg)
 
 @app.route('/send-message')
 def send_message():
-    if 'user_id' not in session: return 'Usuário não autenticado', 401
+    if 'user_id' not in session: return 'Erro: Usuário não autenticado.', 401
     
     to_id = request.args.get('to_id')
     msg_text = request.args.get('msg_text')
