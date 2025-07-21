@@ -15,7 +15,18 @@ Seu objetivo é oferecer uma maneira intuitiva e simples de interagir com o Serv
 
 ## Tecnologias utilizadas
 
-+ Python
++ Backend em Python com Flask
++ Frontend com Jinja2
+
+## Como rodar
+
+1. Clone o repositório
+2. Instale Python 3.x
+3. (Opcional) Adicione um ambiente virtual e ative-o com source .venv/Scripts/activate
+4. Instale as dependências com pip install -r requirements.txt
+5. Rode usando o comando flask --app backend/app run
+6. Acesse o endereço http://localhost:5000/
+
 
 ## Equipe (Grupo C)
 
