@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Hermes - Login</title>
+    <link rel="icon" href="{{ url_for('static', filename='hermes_icon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <script src="{{ url_for('static', filename='main.js') }}" defer></script>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="post">
+        Usuário: <input type="number"  name="user_id"><br>
+        Senha: <input type="password" name="password"><br>
+        <button type="submit">Entrar</button>
+    </form>
+    {% if error %}
+        <p style="color:red">{{ erro }}</p>
+    {% endif %}
+</body>
+</html>
