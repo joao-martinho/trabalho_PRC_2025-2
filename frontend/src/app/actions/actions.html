@@ -1,7 +1,143 @@
-<mat-tab-group>
-  <mat-tab label="GET-USERS">
-    
-  </mat-tab>
-  <mat-tab label="GET-MESSAGE"> Content 2 </mat-tab>
-  <mat-tab label="SEND-MESSAGE"> Content 3 </mat-tab>
-</mat-tab-group>
+<div class="center-card">
+  <mat-card>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="GET-USERS">
+        <div class="mat-tab-center">
+          <button matButton="outlined" (click)="getUsers()">Chamar endpoint</button>
+
+          <div class="table">
+            <table mat-table [dataSource]="usersInfo" class="mat-elevation-z8">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Identificador </th>
+                <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nome </th>
+                <td mat-cell *matCellDef="let user"> {{ user.name }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="victories">
+                <th mat-header-cell *matHeaderCellDef> Vitórias </th>
+                <td mat-cell *matCellDef="let user"> {{ user.victories }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedUsersColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedUsersColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="GET-MESSAGE">
+        <div class="mat-tab-center">
+          <button matButton="outlined" (click)="getMessage()">Chamar endpoint</button>
+
+          <div class="table">
+            <table mat-table [dataSource]="messageInfo" class="mat-elevation-z8">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Identificador </th>
+                <td mat-cell *matCellDef="let m"> {{ m.id }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="message">
+                <th mat-header-cell *matHeaderCellDef> Mensagem </th>
+                <td mat-cell *matCellDef="let m"> {{ m.message }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedMessageColumn"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedMessageColumn;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="SEND-MESSAGE">
+        <div class="mat-tab-center">
+          <div class="mat-form">
+            <mat-form-field>
+              <mat-label>Digite o usuário que será enviado</mat-label>
+              <input #userToSendInput matInput [formControl]="userToSendMessageControl" maxlength="4">
+              @if (userToSendMessageControl.hasError('required')) {
+              <mat-error>Necessário informar usuário</mat-error>
+              }
+              @if (userToSendMessageControl.hasError('pattern')) {
+              <mat-error>Usuário deve conter 4 dígitos ou o zero</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Digite o usuário que será enviado</mat-label>
+              <input #messageInput matInput [formControl]="messageControl">
+              @if (userToSendMessageControl.hasError('required')) {
+                <mat-error>Necessário informar a mensagem</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <button matButton="outlined" (click)="sendMessage()">Chamar endpoint</button>
+        </div>
+      </mat-tab>
+      <mat-tab label="GET-PLAYERS">
+        <div class="mat-tab-center">
+          <button matButton="outlined" (click)="getPlayers()">Chamar endpoint</button>
+
+          <div class="table">
+            <table mat-table [dataSource]="playersInfo" class="mat-elevation-z8">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Identificador </th>
+                <td mat-cell *matCellDef="let player"> {{ player.id }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nome </th>
+                <td mat-cell *matCellDef="let player"> {{ player.name }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef> Estado </th>
+                <td mat-cell *matCellDef="let player"> {{ player.state }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedPlayersColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedPlayersColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="GET-CARD">
+        <div class="mat-tab-center">
+          <button matButton="outlined" (click)="getCard()">Chamar endpoint</button>
+
+          <div class="table">
+            <table mat-table [dataSource]="cardInfo" class="mat-elevation-z8">
+              <ng-container matColumnDef="card">
+                <th mat-header-cell *matHeaderCellDef> Carta </th>
+                <td mat-cell *matCellDef="let c"> {{ c.card }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="suit">
+                <th mat-header-cell *matHeaderCellDef> Naipe </th>
+                <td mat-cell *matCellDef="let c"> {{ c.suit }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedCardColumn"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedCardColumn;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="SEND-GAME">
+        <div class="mat-tab-center">
+          <div class="mat-form">
+            <mat-form-field>
+              <mat-label>Ações</mat-label>
+              <mat-select [(ngModel)]="selectedType">
+                @for (t of types; track t) {
+                <mat-option [value]="t.value">{{t.viewValue}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <button matButton="outlined" (click)="sendGame()">Chamar endpoint</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

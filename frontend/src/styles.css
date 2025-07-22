@@ -7,3 +7,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: #cccccc;
 }
+
+app-root {
+    height: 100vh;
+}
