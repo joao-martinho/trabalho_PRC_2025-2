@@ -1,0 +1,4 @@
+
+interface UsersInfo {
+    users: UsersInfo[]
+}
