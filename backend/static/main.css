@@ -1,0 +1,11 @@
+#status {
+    font-weight: bold; margin-top: 1em;
+}
+
+.success {
+    color: green;
+}
+
+.error {
+    color: red;
+}
