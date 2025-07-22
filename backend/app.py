@@ -93,14 +93,11 @@ def get_players():
 
     users = []
     for i in range(0, len(parts) - 1, 2):
-        try:
-            users.append({
-                "id": parts[i],
-                "name": obter_nome_usuario(users_message, parts[i]),
-                "state": int(parts[i + 1])
-            })
-        except (IndexError, ValueError):
-            continue
+        users.append({
+            "id": parts[i],
+            "name": obter_nome_usuario(users_message, parts[i]),
+            "state": parts[i + 1]
+        })
 
     return jsonify({"players": users})
 
