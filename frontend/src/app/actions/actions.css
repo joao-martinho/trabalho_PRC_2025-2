@@ -1,0 +1,51 @@
+
+.center-card {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-tab-group {
+    height: 100%;
+}
+
+mat-card {
+    height: 90%;
+    width: 90%;
+}
+
+.mat-tab-center {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+button {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.table {
+    width: 80%;
+    border-radius: 20px;
+}
+
+table {
+    width: 100%;
+    background-color: #fff1ed;
+}
+
+mat-form-field {
+    margin-top: 20px;
+}
+
+.mat-form {
+    display: flex;
+    gap: 20px;
+}
